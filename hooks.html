@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Good Cars — банк хуков и форматов</title>
+<style>
+  :root{--bg:#0e1014;--card:#161920;--card2:#1c2029;--line:#262b36;
+    --tx:#e9ebf0;--tx2:#98a1b0;--tx3:#6a7280;
+    --acc:#4a9eff;--gold:#f5b544;--green:#3fb950;--red:#f0663f;--purple:#a371f7}
+  @media (prefers-color-scheme: light){
+    :root{--bg:#f7f8fa;--card:#fff;--card2:#f1f3f6;--line:#e3e6eb;
+      --tx:#11141a;--tx2:#5a6371;--tx3:#8992a0;
+      --acc:#1f6feb;--gold:#b4770a;--green:#1a7f37;--red:#c0432a;--purple:#7c4dd6}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:44px 22px 90px}
+
+  .kicker{color:var(--acc);font-size:12.5px;font-weight:650;letter-spacing:.1em;
+    text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:37px;line-height:1.15;font-weight:660;letter-spacing:-.028em;margin:0 0 14px}
+  .lead{color:var(--tx2);font-size:17px;max-width:750px;margin:0}
+  .nums{display:flex;flex-wrap:wrap;gap:11px;margin:26px 0 8px}
+  .num{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 18px;min-width:118px}
+  .num b{display:block;font-size:25px;font-weight:660;letter-spacing:-.024em}
+  .num span{font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em}
+
+  h2{font-size:26px;font-weight:645;letter-spacing:-.02em;margin:52px 0 8px}
+  .sub{color:var(--tx2);margin:0 0 20px;max-width:790px}
+
+  .pill{font-size:10.5px;font-weight:650;padding:3px 8px;border-radius:5px;
+    letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+  .pill.tofu{background:var(--purple);color:#fff}
+  .pill.mofu{background:var(--acc);color:#fff}
+  .pill.bofu{background:var(--tx3);color:#fff}
+
+  .flt{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:20px;
+    position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:10;border-bottom:1px solid var(--line)}
+  .flt .fl{font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;font-weight:650}
+  .chip{border:1px solid var(--line);background:var(--card);color:var(--tx2);
+    border-radius:8px;padding:7px 14px;font-size:13.5px;cursor:pointer}
+  .chip:hover{color:var(--tx)}
+  .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .cnt{margin-left:auto;color:var(--tx2);font-size:13.5px}
+
+  .grp{background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:20px 23px;margin-bottom:14px}
+  .gh{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:7px}
+  .gh h3{margin:0;font-size:19px;font-weight:640;letter-spacing:-.015em}
+  .ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;
+    justify-content:center;font-size:16px;font-weight:700;color:#fff;flex:0 0 30px}
+  .ico.tofu{background:var(--purple)} .ico.mofu{background:var(--acc)} .ico.bofu{background:var(--tx3)}
+  .gc{margin-left:auto;color:var(--tx3);font-size:12.5px}
+  .gw{color:var(--tx2);font-size:14.6px;margin:0 0 15px}
+
+  .hk{background:var(--card2);border-radius:9px;padding:13px 16px;margin-bottom:8px}
+  .hk:last-child{margin-bottom:0}
+  .hx{font-size:16.5px;font-weight:555;line-height:1.45;margin-bottom:6px}
+  .hm{color:var(--tx3);font-size:12.5px;display:flex;gap:9px;flex-wrap:wrap;align-items:center;
+    font-variant-numeric:tabular-nums}
+  .hm b{color:var(--tx2);font-weight:640}
+  .hm a{color:var(--acc);text-decoration:none;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+  .hm a:hover{text-decoration:underline}
+  .src{background:var(--card);border:1px solid var(--line);border-radius:4px;
+    padding:1px 6px;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;font-weight:640}
+
+  .fmts{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:13px}
+  .fmt{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:19px 21px;
+    display:flex;flex-direction:column}
+  .fh{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+  .fh h3{margin:0;font-size:17.5px;font-weight:640;letter-spacing:-.014em}
+  .fmeta{display:flex;gap:8px;flex-wrap:wrap;color:var(--tx3);font-size:11.5px;margin-bottom:13px}
+  .fmeta span{background:var(--card2);border-radius:5px;padding:2px 8px}
+  .fmeta .rec{color:var(--green);font-weight:640}
+  .lbl{font-size:10.5px;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;
+    font-weight:650;margin:9px 0 4px}
+  .fmt p{color:var(--tx2);font-size:14.2px;margin:0;line-height:1.55}
+  .fn{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);
+    color:var(--tx2);font-size:13.4px;font-style:italic}
+  .flink{margin-top:12px;color:var(--acc);text-decoration:none;font-size:13.5px;font-weight:550}
+  .flink:hover{text-decoration:underline}
+
+  .find{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:11px;padding:19px 23px;margin-bottom:13px}
+  .find h4{margin:0 0 7px;font-size:17.5px;font-weight:640}
+  .find p{color:var(--tx2);margin:0;font-size:15px}
+  .find p b{color:var(--tx)}
+  .find.warn{border-left-color:var(--red)}
+  .find.good{border-left-color:var(--green)}
+
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 19px 44px;
+    border-left:1px solid var(--line);margin-left:15px}
+  ol.steps li:last-child{border-left-color:transparent;padding-bottom:0}
+  ol.steps li::before{content:counter(s);position:absolute;left:-15px;top:-2px;
+    width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:660}
+  ol.steps b{display:block;margin-bottom:3px;font-size:16.5px}
+  ol.steps span{color:var(--tx2);font-size:14.8px}
+
+
+  .vd{font-size:10.5px;font-weight:650;padding:3px 9px;border-radius:5px;text-transform:uppercase;letter-spacing:.04em}
+  .vd.v-ok{background:rgba(63,185,80,.17);color:var(--green)}
+  .vd.v-ad{background:rgba(245,181,68,.17);color:var(--gold)}
+  .vd.v-no{background:rgba(240,102,63,.15);color:var(--red)}
+  .meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--tx3);font-size:12.8px;margin-bottom:11px}
+  .meta b{color:var(--tx2);font-weight:600}
+  .dna{border-radius:9px;padding:12px 15px;font-size:14.2px;color:var(--tx2);margin:14px 0 0;
+    border-left:3px solid var(--line);background:var(--card2)}
+  .dna b{color:var(--tx)}
+  .dna.v-ok{border-left-color:var(--green)}
+  .dna.v-ad{border-left-color:var(--gold)}
+  .dna.v-no{border-left-color:var(--red)}
+  .lbl2{font-size:10.5px;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;
+    font-weight:650;margin:16px 0 7px}
+  .adapt{margin-top:15px;padding:15px 17px;border-radius:10px;
+    background:linear-gradient(180deg,rgba(74,158,255,.09),rgba(74,158,255,.03));
+    border:1px solid rgba(74,158,255,.28)}
+  .al{font-size:10.5px;color:var(--acc);text-transform:uppercase;letter-spacing:.07em;
+    font-weight:680;margin-bottom:9px}
+  .ax{font-size:16px;font-weight:530;line-height:1.5;padding:8px 0;border-bottom:1px solid var(--line)}
+  .ax:last-child{border-bottom:0;padding-bottom:0}
+  .grp[data-v="no"]{opacity:.72}
+  footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
+    color:var(--tx3);font-size:12.8px}
+</style>
+</head>
+<body>
+<nav class="sitenav"><a href="index.html">← Все материалы</a></nav>
+<style>.sitenav{max-width:1080px;margin:0 auto;padding:14px 22px 0}
+.sitenav a{color:#4a9eff;text-decoration:none;font-size:14px;font-weight:550}
+.sitenav a:hover{text-decoration:underline}
+@media(prefers-color-scheme:light){.sitenav a{color:#1f6feb}}</style>
+<div class="wrap">
+
+<div class="kicker">Анализ конкурентов · Одесса и Украина</div>
+<h1>Банк хуков и форматов</h1>
+<p class="lead">Библиотека рабочих приёмов из 119 лучших роликов тринадцати аккаунтов.
+Каждый приём привязан к формуле методологии, разобран по рычагам внимания и — главное —
+пропущен через ДНК клиента: берём, адаптируем или не берём. Для тех, что берём,
+написаны готовые хуки под фактуру Good Cars.</p>
+
+<div class="nums">
+  <div class="num"><b>38</b><span>хуков у конкурентов</span></div>
+  <div class="num" style="border-color:var(--acc)"><b style="color:var(--acc)">33</b><span>готовых под Good Cars</span></div>
+  <div class="num"><b>14</b><span>приёмов</span></div>
+  <div class="num"><b>14</b><span>форматов</span></div>
+</div>
+
+<h2>Три правила, которые видно в цифрах</h2>
+<p class="sub">Прежде чем брать приёмы — понимание, почему одни работают, а другие нет.</p>
+
+<div class="find">
+  <h4>Продажа уходит в подпись, эмоция остаётся в кадре</h4>
+  <p>У лидеров рынка характеристики, цена и условия живут <b>только в тексте под роликом</b>.
+  В самом видео — история, вопрос или красивый кадр. Прямой оффер в кадре даёт
+  <b>0,2% лайков</b>, анонс в подписи — <b>6,5%</b>. Разница в тридцать раз.</p>
+</div>
+
+<div class="find good">
+  <h4>Комментарий дороже лайка</h4>
+  <p>Три из четырёх самых результативных приёмов заканчиваются вопросом без ответа:
+  «кто знает, для чего этот отсек», «какую бы взял», «не могу разобраться, подскажите».
+  Ролик с <b>155 комментариями при 279 тысячах просмотров</b> алгоритм показывает дальше,
+  чем ролик с тысячей лайков и молчанием.</p>
+</div>
+
+<div class="find warn">
+  <h4>Не всякий вирусный приём подходит</h4>
+  <p>Два формата из подборки собирают охваты, но вредят: <b>розыгрыш</b> приводит охотников
+  за призами вместо покупателей, а <b>сатира на аудиторию</b> и обзоры с матом бьют по тем,
+  кого мы как раз хотим привлечь. Для сегмента, который ценит спокойный разговор,
+  такие приёмы работают в минус.</p>
+</div>
+
+<h2>Банк хуков</h2>
+<p class="sub">Тридцать восемь хуков в четырнадцати группах. Приведены дословно на языке оригинала —
+это рабочий материал, из которого пишутся сценарии. Пометка показывает, откуда взят хук:
+из речи в ролике, из текста на экране или из подписи под публикацией.</p>
+
+<div class="flt">
+  <span class="fl">Этап воронки</span>
+  <button class="chip on" data-s="">Все</button>
+  <button class="chip" data-s="TOFU">TOFU — охваты</button>
+  <button class="chip" data-s="MOFU">MOFU — доверие</button>
+  <button class="chip" data-s="BOFU">BOFU — продажа</button>
+  <span style="width:14px"></span>
+  <span class="fl">Решение</span>
+  <button class="chip on" data-vf="">Все</button>
+  <button class="chip" data-vf="ok">Берём</button>
+  <button class="chip" data-vf="adapt">Адаптируем</button>
+  <button class="chip" data-vf="no">Не берём</button>
+  <span class="cnt">Показано приёмов: <b id="cnt">14</b></span>
+</div>
+
+<div id="hooks"><div class="grp" data-stage="TOFU" data-v="ok">
+      <div class="gh"><span class="ico tofu">?</span>
+        <h3>Вопрос-загадка без ответа</h3><span class="pill tofu">TOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">4 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Вовлекающий тип · открытая петля любопытства</span><span><b>Рычаги:</b> Интрига + Причастность</span></div>
+      <p class="gw">Ответа в ролике нет — зритель идёт писать в комментарии. Алгоритм читает это как высокую вовлечённость. Снимается за минуту на телефон, монтаж не нужен.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> Подходит без оговорок. Не требует ни крика, ни жаргона — чистое любопытство. Для ядра 42–50, которое не задаёт вопросов вслух, это способ участвовать, ничем не рискуя.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Хто знає, для чого в BMW такий маленький відсік?»</div>
+        <div class="hm"><span class="src">экран</span>
+          <a href="https://www.instagram.com/p/DbVeQN8ACjW/" target="_blank" rel="noopener">@lucky_cars_od</a>
+          <b>279 359</b> просмотров · 17 сек · 155 комм.</div></div><div class="hk">
+        <div class="hx">«Не можу розібратися з цією коробкою передач. А ось B — за що відповідає B? Хто шарить, напишіть»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DbqW2BEAPAD/" target="_blank" rel="noopener">@lucky_cars_od</a>
+          <b>276 440</b> просмотров · 17 сек · 73 комм.</div></div><div class="hk">
+        <div class="hx">«Покажіть хоча б один автомобіль, в якому є такі технології»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/DbsUjBJsuyj/" target="_blank" rel="noopener">@lucky_cars_od</a>
+          <b>131 085</b> просмотров · 13 сек · 24 комм.</div></div><div class="hk">
+        <div class="hx">«Здогадались чому?»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/C6hGB21tA48/" target="_blank" rel="noopener">@vision.auto.ua</a>
+          <b>84 937</b> просмотров · 10 сек · 24 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«Кто скажет, зачем в этой машине вторая кнопка старта? Половина владельцев не знает»</div><div class="ax">«Эта деталь есть только на машинах для внутреннего рынка Японии. Кто угадает, что это?»</div><div class="ax">«Что здесь не так с этим кузовом? Три человека сегодня не заметили»</div></div></div><div class="grp" data-stage="TOFU" data-v="ok">
+      <div class="gh"><span class="ico tofu">⇄</span>
+        <h3>Вопрос-выбор: что взял бы ты</h3><span class="pill tofu">TOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">4 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Вовлекающий тип · причастность</span><span><b>Рычаги:</b> Причастность + Интрига</span></div>
+      <p class="gw">Два варианта рядом и прямой вопрос в подписи. Люди спорят в комментариях бесплатно и охотно. Заодно ненавязчиво показывает две машины из наличия.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> Ложится идеально: ядро мыслит стоимостью владения, а не ценой. Вопрос выбора между двумя машинами — это его ежедневная внутренняя работа.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Какую бы себе взял? M4 135k / M8 87.9k»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/DYNJ3fHMEdG/" target="_blank" rel="noopener">@isauto1</a>
+          <b>2,4 млн</b> просмотров · 95 сек · 731 комм.</div></div><div class="hk">
+        <div class="hx">«Что бы выбрал ты? Какая выглядит борзее?»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DbirvQ-Mt4o/" target="_blank" rel="noopener">@automagnatodessa</a>
+          <b>129 748</b> просмотров · 30 сек · 313 комм.</div></div><div class="hk">
+        <div class="hx">«Согласны?»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/DbVHJFds35B/" target="_blank" rel="noopener">@automagnatodessa</a>
+          <b>101 378</b> просмотров · 46 сек · 162 комм.</div></div><div class="hk">
+        <div class="hx">«RS6 так не сможет, ребята, так что делайте выбор правильный»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/DULbhbyDF4Z/" target="_blank" rel="noopener">@isauto1</a>
+          <b>1,5 млн</b> просмотров · 13 сек · 0 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«Одна теряет 15% в год, вторая 30%. Обе стоят одинаково. Какую берёте?»</div><div class="ax">«Через два года первую заберут за 45, вторую за 28. Разница в цене сегодня — три тысячи. Что выбираете?»</div><div class="ax">«Обе в бюджете. Одна для себя, вторая — чтобы жена не спросила «зачем». Что берём?»</div></div></div><div class="grp" data-stage="MOFU" data-v="ok">
+      <div class="gh"><span class="ico mofu">✕</span>
+        <h3>Разоблачение мифа</h3><span class="pill mofu">MOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">4 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Формула 11 — Разрушение мифов</span><span><b>Рычаги:</b> Интрига + Выгода</span></div>
+      <p class="gw">Берём народное заблуждение и опровергаем наглядно. Зритель получает готовый аргумент для спора — и делится роликом. Формат, который напрямую строит экспертность.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> 🔴 Главный формат для Дмитрия. Прямо бьёт в центральную боль ядра — «я доверился не тем». Даёт зрителю аргумент и сохраняет его достоинство: объясняет, не унижая.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Видео для тех, кто с недавних пор вступил в секту святого толщиномера. Показываю разницу»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DG3UykdiCVh/" target="_blank" rel="noopener">@trinity.odesa</a>
+          <b>230 470</b> просмотров · 80 сек · 54 комм.</div></div><div class="hk">
+        <div class="hx">«Ті поляки брешуть і не червоніють. Дивіться уважно»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DVl0S78DIiu/" target="_blank" rel="noopener">@andrii_autopidbir</a>
+          <b>98 127</b> просмотров · 32 сек · 84 комм.</div></div><div class="hk">
+        <div class="hx">«Многие говорят, что это разгерметизация фары. На самом деле нет»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DT5YiyQiGv8/" target="_blank" rel="noopener">@goodcarsodesa</a>
+          <b>48 069</b> просмотров · 55 сек · 10 комм.</div></div><div class="hk">
+        <div class="hx">«Многие скажут: да уже старая, уже там…»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DbYErGvMN76/" target="_blank" rel="noopener">@automagnatodessa</a>
+          <b>67 722</b> просмотров · 49 сек · 65 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«Толщиномер не показывает битую машину. Показываю, что он показывает на самом деле»</div><div class="ax">««Пробег скручен» — самый бесполезный страх при покупке. Объясню, на что смотреть вместо него»</div><div class="ax">«Вам сказали, что эта машина не битая, потому что все болты родные. Сейчас покажу, почему это ничего не значит»</div></div></div><div class="grp" data-stage="MOFU" data-v="ok">
+      <div class="gh"><span class="ico mofu">!</span>
+        <h3>Инсайд: а вы знали</h3><span class="pill mofu">MOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">3 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Полезный тип · конкретика</span><span><b>Рычаги:</b> Интрига + Выгода</span></div>
+      <p class="gw">Узкая техническая деталь, которую знают не все. Знающие подтверждают в комментариях, остальные досматривают ради факта. Один дубль, никакой подготовки.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> Хорошо ложится: экспертность идёт фоном, а не заявлением — ровно то, о чём договорились на созвоне («показывать, а не рассказывать»).</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Вы знали, что такой лаунч-старт есть только у М5? Ни в одном аппарате нету такого»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DWJWizbAgQK/" target="_blank" rel="noopener">@isauto_trade</a>
+          <b>2,4 млн</b> просмотров · 15 сек · 116 комм.</div></div><div class="hk">
+        <div class="hx">«Покажу, что будет, если нажать со старта газ в пол на ешке 63»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DUTbZqzjE7x/" target="_blank" rel="noopener">@isauto1</a>
+          <b>4,0 млн</b> просмотров · 23 сек · 603 комм.</div></div><div class="hk">
+        <div class="hx">«Что мне нравится на крузаке — это вот то, что можно нажать вот так на одну кнопочку»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/Dbu9bFQMBEk/" target="_blank" rel="noopener">@automagnatodessa</a>
+          <b>31 548</b> просмотров · 25 сек · 5 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«У этой модели есть режим, который включается только двумя кнопками. Дилеры о нём не говорят»</div><div class="ax">«Эта опция добавляет к цене продажи через два года около полутора тысяч. При покупке стоит триста»</div><div class="ax">«Вот по этой детали я за секунду понимаю, что машина ездила по трассе, а не по городу»</div></div></div><div class="grp" data-stage="TOFU" data-v="adapt">
+      <div class="gh"><span class="ico tofu">♥</span>
+        <h3>Личное признание и эмоция</h3><span class="pill tofu">TOFU</span>
+        <span class="vd v-ad">берём с адаптацией</span><span class="gc">3 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Формула 3 — Реверс экспертности</span><span><b>Рычаги:</b> Интрига + Причастность</span></div>
+      <p class="gw">Человек, который по определению видел всё, признаётся в слабости. Работает сильнее любого восторга: если испугался он — значит машина действительно особенная.</p>
+      <div class="dna v-ad"><b>Через ДНК клиента:</b> Берём, но разворачиваем регистр. У ИСАФТО это восторг и адреналин — для ядра Дмитрия это шум. Его версия — спокойное признание об ошибке или сомнении, которое строит доверие.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Сколько машин я переездил. И вот так, чтобы я испугался машину… Это ужас просто»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DazqRthsoIW/" target="_blank" rel="noopener">@isauto1</a>
+          <b>2,9 млн</b> просмотров · 16 сек · 748 комм.</div></div><div class="hk">
+        <div class="hx">«Это машина для сумасшедшего человека, для невменяемого. Для тех, кому нужна реальная эмоция»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DaCeNywNjTj/" target="_blank" rel="noopener">@aleksandr_fedorenko_01</a>
+          <b>49 419</b> просмотров · 80 сек · 11 комм.</div></div><div class="hk">
+        <div class="hx">«Если бы Toyota была M-кой, она бы выглядела именно вот так»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DWRrq_zjBBe/" target="_blank" rel="noopener">@isauto1</a>
+          <b>1,5 млн</b> просмотров · 124 сек · 0 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«За 22 года я ошибся с этой моделью один раз. Расскажу, чтобы вы не повторили»</div><div class="ax">«Мне до сих пор неуютно продавать эту машину. Объясню почему»</div><div class="ax">«Я сам не купил бы себе эту машину. И при этом она хорошая — сейчас объясню разницу»</div></div></div><div class="grp" data-stage="TOFU" data-v="ok">
+      <div class="gh"><span class="ico tofu">☺</span>
+        <h3>Человеческая сценка</h3><span class="pill tofu">TOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">2 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Прогревающий тип · сторителлинг</span><span><b>Рычаги:</b> Интрига + Причастность</span></div>
+      <p class="gw">Самый вирусный формат ниши и самый дешёвый: разговор из окна машины, снятый на телефон. Об автомобилях речи нет вообще — работает человеческая история с моральной развязкой.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> 🔴 Самый вирусный формат ниши и самый безопасный для позиционирования: об автомобилях речи нет, значит нет и риска скатиться в барыжный тон. Показывает человека, а человек и есть продукт Дмитрия.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Ну иди сюда. Сколько стоит? — 50 гривен. …Выбирай: совет или 500 гривен? — Ваш совет. — В следующий раз всегда бери деньги»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DZxgi4fMIW2/" target="_blank" rel="noopener">@isauto1</a>
+          <b>15,9 млн</b> просмотров · 43 сек · 11 921 комм.</div></div><div class="hk">
+        <div class="hx">«Совет тоже тебе дам, и 500 гривен тоже дам. Вот тебе совет: купи чернитель для резины»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DZyFKHrsAv4/" target="_blank" rel="noopener">@isauto1</a>
+          <b>1,2 млн</b> просмотров · 51 сек · 0 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«Приехал продавать машину и всю дорогу извинялся, что она грязная. Дал ему совет, который сэкономит десять тысяч»</div><div class="ax">«Мужчина час выбирал между двумя машинами. В итоге позвонил жене — и купил третью»</div><div class="ax">«Клиент попросил не показывать машину его жене до выходных. Рассказываю, чем закончилось»</div></div></div><div class="grp" data-stage="TOFU" data-v="ok">
+      <div class="gh"><span class="ico tofu">⚠</span>
+        <h3>Предупреждение и реакция на событие</h3><span class="pill tofu">TOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">2 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Формула абсурда · срочность</span><span><b>Рычаги:</b> Срочность + Причастность</span></div>
+      <p class="gw">Снято сразу после происшествия, пять секунд. Тревога в кадре плюс шутка в подписи. Такой контент нельзя запланировать — но можно быть к нему готовым.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> Подходит: короткое, честное, без пафоса. Ядро ценит предсказуемость и заботу — предупреждение считывается как «свой предупредил».</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Все, кто едут там в салон, — очень предельно аккуратно»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DUdF1zVDKra/" target="_blank" rel="noopener">@isauto1</a>
+          <b>1,6 млн</b> просмотров · 5 сек · 448 комм.</div></div><div class="hk">
+        <div class="hx">«Это вчера было, сегодня можете приезжать. Падение было выполнено профессионалом»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/DUdF1zVDKra/" target="_blank" rel="noopener">@isauto1</a>
+          <b>1,6 млн</b> просмотров · 5 сек · 448 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«На Аэропортовской яма, которую сегодня поймали три машины. Объезжайте правым рядом»</div><div class="ax">«С утра эвакуируют с этой стороны улицы. Если приехали к нам — ставьте во дворе»</div><div class="ax">«Вчера у нас на площадке случилось вот это. Никто не пострадал, машина — да»</div></div></div><div class="grp" data-stage="MOFU" data-v="ok">
+      <div class="gh"><span class="ico mofu">→</span>
+        <h3>Научить действию</h3><span class="pill mofu">MOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">3 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Полезный тип · инструкция</span><span><b>Рычаги:</b> Выгода + Причастность</span></div>
+      <p class="gw">Не рассказ о машине, а навык, который зритель уносит с собой. Такие ролики сохраняют, а сохранения алгоритм ценит выше лайков.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> Сильный формат: даёт навык и одновременно снимает страх «меня разведут». Особенно точно попадает в женский сегмент, который рынок Одессы не обслуживает.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Друзья, она заднеприводная. Смотрите: выключаем полностью систему стабилизации… Не бойтесь!»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DXWSkVXgv7L/" target="_blank" rel="noopener">@isauto_trade</a>
+          <b>1,8 млн</b> просмотров · 39 сек · 187 комм.</div></div><div class="hk">
+        <div class="hx">«І найважливіше — перевіряємо лонжерон, щоб не було ніяких складок»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DYU3vTbMdmg/" target="_blank" rel="noopener">@andrii_autopidbir</a>
+          <b>9 972</b> просмотров · 70 сек · 6 комм.</div></div><div class="hk">
+        <div class="hx">«В таких елементах проводимо пальцем — якість покраски корейських авто з німецькими не зрівняється»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DYUZacrsPo2/" target="_blank" rel="noopener">@andrii_autopidbir</a>
+          <b>23 018</b> просмотров · 60 сек · 0 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«Три вещи, которые проверяет за минуту любой человек без опыта. Пальцем, без приборов»</div><div class="ax">«Если вы едете смотреть машину одна — вот что сказать продавцу, чтобы к вам отнеслись серьёзно»</div><div class="ax">«Как за пять минут понять, что машину готовили к продаже, а не эксплуатировали»</div></div></div><div class="grp" data-stage="TOFU" data-v="no">
+      <div class="gh"><span class="ico tofu">☻</span>
+        <h3>Сатира на свою аудиторию</h3><span class="pill tofu">TOFU</span>
+        <span class="vd v-no">не берём</span><span class="gc">2 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Развлекательный тип · провокация</span><span><b>Рычаги:</b> Интрига</span></div>
+      <p class="gw">Смех над узнаваемым типажом покупателя. Рискованный приём: собирает охваты, но бьёт по части аудитории. Работает, только если тон точно совпадает с позиционированием.</p>
+      <div class="dna v-no"><b>Через ДНК клиента:</b> 🔴 Не берём. Ядро — мужчина, который двадцать лет уходил от среды 90-х и болезненно реагирует на насмешку над своим кругом. Формат даёт охват, но приводит не ту аудиторию и ломает главный актив — «с ним можно по-человечески».</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Девочки, даю совет, как распознать ранг тигра-козыря, который к вам подкатывает»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DakLpLGt08i/" target="_blank" rel="noopener">@trinity.odesa</a>
+          <b>203 992</b> просмотров · 39 сек · 20 комм.</div></div><div class="hk">
+        <div class="hx">«На них сейчас ездят только бизнесмены, которые живут в придуманном мире»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DanSv4Mte2f/" target="_blank" rel="noopener">@trinity.odesa</a>
+          <b>16 993</b> просмотров · 12 сек · 0 комм.</div></div></div>
+      </div><div class="grp" data-stage="BOFU" data-v="adapt">
+      <div class="gh"><span class="ico bofu">$</span>
+        <h3>Цена как провокация</h3><span class="pill bofu">BOFU</span>
+        <span class="vd v-ad">берём с адаптацией</span><span class="gc">3 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Формула 2 — Атака святого</span><span><b>Рычаги:</b> Интрига + Выгода</span></div>
+      <p class="gw">Вопрос о цене в первой секунде и обоснование дальше. Работает на статусный сегмент: зритель проверяет, понимает ли он, о чём речь.</p>
+      <div class="dna v-ad"><b>Через ДНК клиента:</b> Берём, но переносим фокус с цены покупки на стоимость владения — это язык, на котором с ядром не говорит никто в городе. У Дмитрия под это есть 22 года данных по остаточной стоимости.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Чому він найдешевший на нашому українському ринку? Бо ми так вміємо працювати»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DYEca2CNHtc/" target="_blank" rel="noopener">@aleksandr_fedorenko_01</a>
+          <b>136 328</b> просмотров · 36 сек · 14 комм.</div></div><div class="hk">
+        <div class="hx">«От первоначальной стоимости 145 сегодня вы можете забрать её за 90. Почувствуй разницу»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DaQUMaTtU_o/" target="_blank" rel="noopener">@aleksandr_fedorenko_01</a>
+          <b>45 064</b> просмотров · 129 сек · 0 комм.</div></div><div class="hk">
+        <div class="hx">«Увага, зниження ціни: 26 000. Сьогодні подзвонили — треба вже продати»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DbiZHb2KRcz/" target="_blank" rel="noopener">@autogorod.odessa</a>
+          <b>10 147</b> просмотров · 60 сек · 7 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«Эта машина дешевле рынка на четыре тысячи. Объясняю, где подвох — он есть»</div><div class="ax">«Дешёвая машина, которая обошлась владельцу дороже всех. Считаем на бумаге»</div><div class="ax">«Год езды на этой машине стоит восемь тысяч. На той, что вдвое дешевле — двенадцать. Показываю расчёт»</div></div></div><div class="grp" data-stage="BOFU" data-v="ok">
+      <div class="gh"><span class="ico bofu">◷</span>
+        <h3>Анонс вместо оффера</h3><span class="pill bofu">BOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">3 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Продающий тип · интрига</span><span><b>Рычаги:</b> Интрига + Срочность</span></div>
+      <p class="gw">Красивое видео и три слова в подписи. Характеристик в кадре нет ни одной — они уходят в текст. Даёт 6,5% лайков против 0,2% у прямой рекламы.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> Берём как основной способ продавать. Тихо, без давления, с достоинством — ровно то, что ядро считает признаком «своего». Вся конкретика уходит в подпись.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Скоро у нас в продаже!»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/Dbp7yJiCJwC/" target="_blank" rel="noopener">@isauto_trade</a>
+          <b>2,8 млн</b> просмотров · 12 сек · 288 комм.</div></div><div class="hk">
+        <div class="hx">«Продана»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/DbsO6jwsK8t/" target="_blank" rel="noopener">@automagnatodessa</a>
+          <b>217 972</b> просмотров · 17 сек · 44 комм.</div></div><div class="hk">
+        <div class="hx">«Mercedes-Benz SL 63 AMG 2022, 15к пробіг… (вся спецификация — в подписи, в кадре только видео)»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/DVTP-hUjL3b/" target="_blank" rel="noopener">@isauto_trade</a>
+          <b>1,8 млн</b> просмотров · 29 сек · 285 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«Завтра выставляем. Одна из тех машин, которые уходят до объявления»</div><div class="ax">«Приехала в наличие. Характеристики — под роликом»</div><div class="ax">«Ушла за два дня. Такие обычно и уходят за два дня»</div></div></div><div class="grp" data-stage="BOFU" data-v="no">
+      <div class="gh"><span class="ico bofu">◉</span>
+        <h3>Прямой оффер в лоб</h3><span class="pill bofu">BOFU</span>
+        <span class="vd v-no">не берём</span><span class="gc">2 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Продающий тип</span><span><b>Рычаги:</b> Выгода + Срочность</span></div>
+      <p class="gw">Единственный формат в подборке, который не летает сам: 27 комментариев на 227 тысяч просмотров. Такие ролики работают только с рекламным бюджетом.</p>
+      <div class="dna v-no"><b>Через ДНК клиента:</b> 🔴 Не берём в органику. Формат органически не летает — 27 комментариев на 227 тысяч просмотров. Работает только с рекламным бюджетом, а на созвоне договорились: подход — органика, реклама отдельный трек.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Хочеш швидко продати своє авто? Оцінюємо за 15 хвилин і гроші одразу»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DOEn9M5CFqC/" target="_blank" rel="noopener">@autogorod.odessa</a>
+          <b>227 116</b> просмотров · 13 сек · 27 комм.</div></div><div class="hk">
+        <div class="hx">«Вот именно вот так вот быстро мы оформляем кредиты без банков и кредитных историй»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/Da8KHa9tgUO/" target="_blank" rel="noopener">@trinity.odesa</a>
+          <b>10 622</b> просмотров · 9 сек · 0 комм.</div></div></div>
+      </div><div class="grp" data-stage="BOFU" data-v="ok">
+      <div class="gh"><span class="ico bofu">⚑</span>
+        <h3>Закулисье сделки</h3><span class="pill bofu">BOFU</span>
+        <span class="vd v-ok">берём</span><span class="gc">2 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Прогревающий тип · закулисье</span><span><b>Рычаги:</b> Интрига + Причастность</span></div>
+      <p class="gw">Съёмка процесса вместо рассказа о нём: приехали, забрали, оформили. Доказательство работы сильнее любого обещания в титрах.</p>
+      <div class="dna v-ok"><b>Через ДНК клиента:</b> Подходит: показывает работу вместо рассказа о ней. Снимает главный страх ядра — «доверился не тем», потому что процесс виден целиком.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Друзі, всім привіт! Знаходимося у Вроцлаві, як бачите, в Європі. Забираємо даний автомобіль»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/C-7-7CMNmTj/" target="_blank" rel="noopener">@lucky_cars_od</a>
+          <b>329 590</b> просмотров · 20 сек · 31 комм.</div></div><div class="hk">
+        <div class="hx">«Заехал на Брабус. Это Гелик, переодетый в оригинальный Брабус. Реально ненормальная машина»</div>
+        <div class="hm"><span class="src">речь</span>
+          <a href="https://www.instagram.com/p/DY9hxQLiuMN/" target="_blank" rel="noopener">@isauto_trade</a>
+          <b>1,2 млн</b> просмотров · 108 сек · 0 комм.</div></div></div>
+      <div class="adapt"><div class="al">Готовые хуки под Good Cars</div><div class="ax">«Клиент прислал фото, я назвал цену не глядя. Сейчас увидим, насколько я промахнулся»</div><div class="ax">«Забираем машину у человека, который два месяца продавал её сам. Расскажу, сколько он потерял на этом»</div><div class="ax">«Вот что происходит с машиной между «я продаю» и «деньги на счету». Обычно этого никто не видит»</div></div></div><div class="grp" data-stage="TOFU" data-v="no">
+      <div class="gh"><span class="ico tofu">★</span>
+        <h3>Розыгрыш</h3><span class="pill tofu">TOFU</span>
+        <span class="vd v-no">не берём</span><span class="gc">1 хуков</span></div>
+      <div class="meta"><span><b>Формула:</b> Вовлекающий тип · искусственный всплеск</span><span><b>Рычаги:</b> Выгода</span></div>
+      <p class="gw">Даёт всплеск: 11 383 комментария на одном ролике. Но приводит охотников за призами, а не покупателей — на дистанции портит качество аудитории.</p>
+      <div class="dna v-no"><b>Через ДНК клиента:</b> 🔴 Не берём. Даёт всплеск комментариев, но приводит охотников за призами. Для сегмента с чеком $40–150k это не просто бесполезно — это размывает аудиторию и снижает доверие к салону.</div>
+      <div class="lbl2">Как это звучит у конкурентов</div>
+      <div class="hks"><div class="hk">
+        <div class="hx">«Объявляем розыгрыш. Условие: быть подписанным и оставить комментарий»</div>
+        <div class="hm"><span class="src">подпись</span>
+          <a href="https://www.instagram.com/p/DZxXe0ENxpU/" target="_blank" rel="noopener">@bibika_odessa</a>
+          <b>163 668</b> просмотров · 36 сек · 11 383 комм.</div></div></div>
+      </div></div>
+
+<h2>Банк форматов</h2>
+<p class="sub">Четырнадцать схем производства. «Сложность» — что требуется помимо телефона:
+ноль значит снимается на ходу без подготовки.</p>
+<div class="fmts" id="fmts"><div class="fmt" data-stage="TOFU" data-v="ok">
+      <div class="fh"><h3>Человеческая сценка</h3><span class="pill tofu">TOFU</span></div>
+      <div class="fmeta"><span>30–60 сек</span><span>прогревающий</span>
+        <span>снимает: Дмитрий сам</span><span class="rec">рекорд 15,9 млн</span></div>
+      <div class="lbl">Что в кадре</div><p>Случайная встреча у машины: разговор с ребёнком, прохожим, клиентом. Внутри — маленький моральный выбор и развязка.</p>
+      <div class="lbl">Как снимать</div><p>Телефон, съёмка из окна или с рук. Один дубль, без монтажа и титров.</p>
+      <div class="dna v-ok"><b>берём.</b> Снимается на телефон без подготовки — единственный ресурс, который не зависит от ушедшего видеографа.</div>
+      <a class="flink" href="https://www.instagram.com/p/DZxgi4fMIW2/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="TOFU" data-v="ok">
+      <div class="fh"><h3>Загадка в кадре</h3><span class="pill tofu">TOFU</span></div>
+      <div class="fmeta"><span>10–20 сек</span><span>вовлекающий</span>
+        <span>снимает: Стас или Дмитрий</span><span class="rec">рекорд 279 359</span></div>
+      <div class="lbl">Что в кадре</div><p>Крупный план детали автомобиля и вопрос на экране. Ответа в ролике нет.</p>
+      <div class="lbl">Как снимать</div><p>Снимается на площадке между делами. Нужен только текст на экране.</p>
+      <div class="dna v-ok"><b>берём.</b> Можно снимать пачкой: обошёл площадку, снял пять деталей — контент на неделю вперёд.</div>
+      <a class="flink" href="https://www.instagram.com/p/DbVeQN8ACjW/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="TOFU" data-v="ok">
+      <div class="fh"><h3>Красивый кадр под музыку</h3><span class="pill tofu">TOFU</span></div>
+      <div class="fmeta"><span>10–15 сек</span><span>развлекательный</span>
+        <span>снимает: Стас</span><span class="rec">рекорд 13,0 млн</span></div>
+      <div class="lbl">Что в кадре</div><p>Медленные проезды камерой по кузову или колонна машин на закате. Ни слова.</p>
+      <div class="lbl">Как снимать</div><p>Нужен хороший свет: рассвет или закат. Съёмка с рук, стабилизация телефона.</p>
+      <div class="dna v-ok"><b>берём.</b> Материал уже снимается для объявлений — нужен только другой монтаж и звук.</div>
+      <a class="flink" href="https://www.instagram.com/p/DY6-FRBiHtD/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="TOFU" data-v="adapt">
+      <div class="fh"><h3>Трендовый звук + машина</h3><span class="pill tofu">TOFU</span></div>
+      <div class="fmeta"><span>15–25 сек</span><span>развлекательный</span>
+        <span>снимает: Стас</span><span class="rec">рекорд 217 972</span></div>
+      <div class="lbl">Что в кадре</div><p>Популярный аудиофрагмент из фильма или мема поверх съёмки автомобиля.</p>
+      <div class="lbl">Как снимать</div><p>Берётся звук из библиотеки Instagram, накладывается на готовый материал.</p>
+      <div class="dna v-ad"><b>берём с адаптацией.</b> Берём, но звук выбирать без агрессии и понтов: ядро отторгает «смотри какая тачка». Спокойный или ироничный трек.</div>
+      <a class="flink" href="https://www.instagram.com/p/DbsO6jwsK8t/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="MOFU" data-v="ok">
+      <div class="fh"><h3>Разоблачение мифа</h3><span class="pill mofu">MOFU</span></div>
+      <div class="fmeta"><span>60–90 сек</span><span>полезный</span>
+        <span>снимает: Дмитрий</span><span class="rec">рекорд 230 470</span></div>
+      <div class="lbl">Что в кадре</div><p>Народное заблуждение опровергается наглядным экспериментом прямо в кадре.</p>
+      <div class="lbl">Как снимать</div><p>Нужен реквизит: прибор, две машины, купюра. Один дубль, объяснение голосом.</p>
+      <div class="dna v-ok"><b>берём.</b> 🔴 Главный формат. Под него у Дмитрия 22 года фактуры и данные по остаточной стоимости, которых нет ни у кого в городе.</div>
+      <a class="flink" href="https://www.instagram.com/p/DG3UykdiCVh/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="MOFU" data-v="ok">
+      <div class="fh"><h3>Снятие тревоги покупателя</h3><span class="pill mofu">MOFU</span></div>
+      <div class="fmeta"><span>50–90 сек</span><span>полезный</span>
+        <span>снимает: Дмитрий</span><span class="rec">рекорд 48 069</span></div>
+      <div class="lbl">Что в кадре</div><p>Ответ на вопрос, который человек стесняется задать вслух: почему запотевают фары, почему цена ниже рынка.</p>
+      <div class="lbl">Как снимать</div><p>Обход машин с телефоном, объяснение голосом за кадром.</p>
+      <div class="dna v-ok"><b>берём.</b> Уже доказан на его же аккаунте: лучший ролик за год. Нужен только текстовый хук в первом кадре.</div>
+      <a class="flink" href="https://www.instagram.com/p/DT5YiyQiGv8/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="MOFU" data-v="ok">
+      <div class="fh"><h3>Научить действию</h3><span class="pill mofu">MOFU</span></div>
+      <div class="fmeta"><span>30–60 сек</span><span>полезный</span>
+        <span>снимает: Дмитрий</span><span class="rec">рекорд 1,8 млн</span></div>
+      <div class="lbl">Что в кадре</div><p>Пошаговый приём: как проверить лонжерон, как отключить систему стабилизации, куда смотреть при осмотре.</p>
+      <div class="lbl">Как снимать</div><p>Съёмка от первого лица, комментарий по ходу действия.</p>
+      <div class="dna v-ok"><b>берём.</b> Отдельно попадает в женский сегмент 10–15%, который рынок Одессы не обслуживает вообще.</div>
+      <a class="flink" href="https://www.instagram.com/p/DXWSkVXgv7L/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="MOFU" data-v="ok">
+      <div class="fh"><h3>Инсайд про модель</h3><span class="pill mofu">MOFU</span></div>
+      <div class="fmeta"><span>15–25 сек</span><span>полезный</span>
+        <span>снимает: Дмитрий</span><span class="rec">рекорд 2,4 млн</span></div>
+      <div class="lbl">Что в кадре</div><p>Одна узкая техническая деталь, о которой знают не все: функция, кнопка, особенность мотора.</p>
+      <div class="lbl">Как снимать</div><p>Один дубль в салоне, показать и рассказать.</p>
+      <div class="dna v-ok"><b>берём.</b> Экспертность фоном, без заявлений — ровно как договорились на созвоне.</div>
+      <a class="flink" href="https://www.instagram.com/p/DWJWizbAgQK/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="MOFU" data-v="ok">
+      <div class="fh"><h3>Сравнение двух машин</h3><span class="pill mofu">MOFU</span></div>
+      <div class="fmeta"><span>60–95 сек</span><span>вовлекающий</span>
+        <span>снимает: Дмитрий + Стас</span><span class="rec">рекорд 2,4 млн</span></div>
+      <div class="lbl">Что в кадре</div><p>Две машины рядом, живой диалог с оператором, вопрос о выборе — в подписи с ценами.</p>
+      <div class="lbl">Как снимать</div><p>Нужны две машины в кадре и второй человек для диалога.</p>
+      <div class="dna v-ok"><b>берём.</b> Ядро мыслит именно так: не «какая лучше», а «какая выгоднее в обороте». Диалог с оператором держит длинный ролик.</div>
+      <a class="flink" href="https://www.instagram.com/p/DYNJ3fHMEdG/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="TOFU" data-v="ok">
+      <div class="fh"><h3>Реакция на событие</h3><span class="pill tofu">TOFU</span></div>
+      <div class="fmeta"><span>5–15 сек</span><span>прогревающий</span>
+        <span>снимает: кто рядом</span><span class="rec">рекорд 1,6 млн</span></div>
+      <div class="lbl">Что в кадре</div><p>Съёмка происшествия или необычной ситуации сразу, как она случилась.</p>
+      <div class="lbl">Как снимать</div><p>Достать телефон и снять. Шутку добавить в подпись.</p>
+      <div class="dna v-ok"><b>берём.</b> Планировать нельзя, но можно ввести правило: случилось что-то — сняли.</div>
+      <a class="flink" href="https://www.instagram.com/p/DUdF1zVDKra/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="BOFU" data-v="ok">
+      <div class="fh"><h3>Закулисье сделки</h3><span class="pill bofu">BOFU</span></div>
+      <div class="fmeta"><span>20–110 сек</span><span>прогревающий</span>
+        <span>снимает: Стас</span><span class="rec">рекорд 329 590</span></div>
+      <div class="lbl">Что в кадре</div><p>Процесс работы: выезд за машиной, осмотр, оформление, передача ключей.</p>
+      <div class="lbl">Как снимать</div><p>Съёмка с рук по ходу реальной сделки, без постановки.</p>
+      <div class="dna v-ok"><b>берём.</b> Снимается в процессе обычной работы, дополнительного времени не требует.</div>
+      <a class="flink" href="https://www.instagram.com/p/C-7-7CMNmTj/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="BOFU" data-v="ok">
+      <div class="fh"><h3>Анонс вместо оффера</h3><span class="pill bofu">BOFU</span></div>
+      <div class="fmeta"><span>10–30 сек</span><span>продающий</span>
+        <span>снимает: Стас</span><span class="rec">рекорд 2,8 млн</span></div>
+      <div class="lbl">Что в кадре</div><p>Красивое видео машины и три слова в подписи: «скоро в продаже» или «продана».</p>
+      <div class="lbl">Как снимать</div><p>Та же съёмка, что и для красивого кадра. Вся конкретика уходит в текст.</p>
+      <div class="dna v-ok"><b>берём.</b> Заменяет привычные посты-объявления: та же машина, но интрига вместо характеристик в кадре.</div>
+      <a class="flink" href="https://www.instagram.com/p/Dbp7yJiCJwC/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="BOFU" data-v="adapt">
+      <div class="fh"><h3>Обзор комплектации с ценой</h3><span class="pill bofu">BOFU</span></div>
+      <div class="fmeta"><span>60–90 сек</span><span>продающий</span>
+        <span>снимает: Стас</span><span class="rec">рекорд 22 686</span></div>
+      <div class="lbl">Что в кадре</div><p>Детальный проход по машине: что установлено, что проверено, сколько стоит.</p>
+      <div class="lbl">Как снимать</div><p>Обход с телефоном, перечисление голосом. Самый привычный формат рынка.</p>
+      <div class="dna v-ad"><b>берём с адаптацией.</b> Формат, которым рынок перенасыщен. Оставляем, но сокращаем долю и уводим характеристики в подпись.</div>
+      <a class="flink" href="https://www.instagram.com/p/DbbPu0mO62b/" target="_blank" rel="noopener">Пример →</a>
+    </div><div class="fmt" data-stage="BOFU" data-v="no">
+      <div class="fh"><h3>Прямой оффер в лоб</h3><span class="pill bofu">BOFU</span></div>
+      <div class="fmeta"><span>10–15 сек</span><span>продающий</span>
+        <span>снимает: —</span><span class="rec">рекорд 227 116</span></div>
+      <div class="lbl">Что в кадре</div><p>Говорящая голова в кабинете: «хочешь быстро продать авто — оценим за 15 минут».</p>
+      <div class="lbl">Как снимать</div><p>Штатив, стол, титры поверх речи.</p>
+      <div class="dna v-no"><b>не берём.</b> 🔴 Не берём в органику: без бюджета не летает. Если запускать — только как рекламный креатив отдельным треком.</div>
+      <a class="flink" href="https://www.instagram.com/p/DOEn9M5CFqC/" target="_blank" rel="noopener">Пример →</a>
+    </div></div>
+
+<h2>С чего начать Good Cars</h2>
+<p class="sub">Порядок, в котором приёмы дают результат быстрее всего.</p>
+<ol class="steps">
+  <li><b>Добавить текстовый хук в первый кадр</b>
+  <span>Контент уже правильный: ролик про запотевшие фары — лучший за год. Не хватает надписи
+  в первой секунде, которая останавливает пролистывание.</span></li>
+  <li><b>Два коротких ролика в неделю: загадка и красивый кадр</b>
+  <span>До пятнадцати секунд, снимаются между делами на площадке, монтаж не нужен.
+  Это верх воронки, которого у Good Cars сейчас нет вообще.</span></li>
+  <li><b>Серия разоблачений мифов</b>
+  <span>За 22 года накопился список заблуждений покупателя. Каждое — ролик с наглядным
+  опровержением. Формат подтверждён цифрами конкурента и точно ложится на экспертность.</span></li>
+  <li><b>Снимать живые сцены на площадке</b>
+  <span>Разговоры с клиентами, неожиданный торг, случаи дня. Самый вирусный ролик рынка —
+  именно такой, и в Одессе этого не делает никто.</span></li>
+  <li><b>Перенести характеристики из кадра в подпись</b>
+  <span>В видео оставить эмоцию и один вопрос, всю конкретику увести в текст.
+  Это единственное изменение, которое ничего не стоит, а отклик поднимает кратно.</span></li>
+</ol>
+
+<footer>
+  Собрано 7 августа 2026. Разобрано 119 роликов — десятка лучших по просмотрам у каждого
+  из тринадцати аккаунтов. Речь расшифрована локально; 35 роликов из выборки не содержат речи —
+  для них хук взят с экрана или из подписи. Цитаты приведены дословно в исследовательских целях.
+</footer>
+
+</div>
+<script>
+let S="", V="";
+function apply(){
+  let n=0;
+  document.querySelectorAll(".grp").forEach(g=>{
+    const ok=(!S||g.dataset.stage===S)&&(!V||g.dataset.v===V);
+    g.style.display=ok?"":"none"; if(ok)n++;
+  });
+  document.querySelectorAll(".fmt").forEach(f=>{
+    f.style.display=((!S||f.dataset.stage===S)&&(!V||f.dataset.v===V))?"":"none";
+  });
+  document.getElementById("cnt").textContent=n;
+}
+document.querySelectorAll(".chip[data-s]").forEach(c=>c.onclick=()=>{
+  document.querySelectorAll(".chip[data-s]").forEach(x=>x.classList.remove("on"));
+  c.classList.add("on"); S=c.dataset.s; apply();
+});
+document.querySelectorAll(".chip[data-vf]").forEach(c=>c.onclick=()=>{
+  document.querySelectorAll(".chip[data-vf]").forEach(x=>x.classList.remove("on"));
+  c.classList.add("on"); V=c.dataset.vf; apply();
+});
+</script>
+</body>
+</html>

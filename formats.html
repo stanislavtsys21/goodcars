@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Good Cars — форматы контента по воронке</title>
+<style>
+  :root{--bg:#0e1014;--card:#161920;--card2:#1c2029;--line:#262b36;
+    --tx:#e9ebf0;--tx2:#98a1b0;--tx3:#6a7280;
+    --acc:#4a9eff;--gold:#f5b544;--green:#3fb950;--red:#f0663f;--purple:#a371f7}
+  @media (prefers-color-scheme: light){
+    :root{--bg:#f7f8fa;--card:#fff;--card2:#f1f3f6;--line:#e3e6eb;
+      --tx:#11141a;--tx2:#5a6371;--tx3:#8992a0;
+      --acc:#1f6feb;--gold:#b4770a;--green:#1a7f37;--red:#c0432a;--purple:#7c4dd6}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:44px 22px 90px}
+  .kicker{color:var(--acc);font-size:12.5px;font-weight:650;letter-spacing:.1em;
+    text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:36px;line-height:1.15;font-weight:660;letter-spacing:-.028em;margin:0 0 13px}
+  .lead{color:var(--tx2);font-size:17px;max-width:770px;margin:0}
+  h2{font-size:26px;font-weight:645;letter-spacing:-.02em;margin:54px 0 8px}
+  h3{font-size:19px;font-weight:640;margin:0}
+  .sub{color:var(--tx2);margin:0 0 22px;max-width:800px}
+
+  .stage{border-radius:14px;padding:22px 24px;margin-bottom:16px;border:1px solid var(--line);
+    background:var(--card)}
+  .stage.t{border-top:3px solid var(--purple)}
+  .stage.m{border-top:3px solid var(--acc)}
+  .stage.b{border-top:3px solid var(--tx3)}
+  .sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:9px}
+  .sh h2{margin:0;font-size:24px}
+  .pill{font-size:10.5px;font-weight:650;padding:3px 9px;border-radius:5px;
+    letter-spacing:.04em;text-transform:uppercase}
+  .pill.t{background:var(--purple);color:#fff}
+  .pill.m{background:var(--acc);color:#fff}
+  .pill.b{background:var(--tx3);color:#fff}
+  .sg{color:var(--tx2);font-size:15px;margin:0 0 14px}
+  .sm{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+  .sm span{background:var(--card2);border-radius:7px;padding:6px 12px;font-size:12.8px;color:var(--tx2)}
+  .sm b{color:var(--tx)}
+
+  .f{background:var(--card2);border-radius:11px;padding:17px 19px;margin-bottom:10px}
+  .fh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+  .fh h3{font-size:17.5px}
+  .fm{color:var(--tx3);font-size:12.3px;display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+  .fm span{background:var(--card);border-radius:5px;padding:2px 8px}
+  .hook{background:var(--card);border-left:2px solid var(--acc);border-radius:0 8px 8px 0;
+    padding:10px 14px;font-size:15.5px;font-weight:540;margin-bottom:10px}
+  .lbl{font-size:10.5px;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;
+    font-weight:650;margin:11px 0 4px}
+  .f p{color:var(--tx2);font-size:14.5px;margin:0;line-height:1.55}
+  .why{margin-top:11px;padding-top:10px;border-top:1px solid var(--line);
+    color:var(--tx2);font-size:13.8px}
+  .why b{color:var(--tx)}
+  .ex{display:inline-block;margin-top:9px;color:var(--acc);text-decoration:none;font-size:13px;font-weight:550}
+  .ex:hover{text-decoration:underline}
+  .exn{color:var(--tx3);font-size:12.5px}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th{text-align:left;color:var(--tx3);font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+    font-weight:650;padding:0 12px 10px;border-bottom:1px solid var(--line)}
+  td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  .tbl{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:10px 6px;overflow-x:auto;margin-bottom:14px}
+  td b{color:var(--tx)}
+  td.n{color:var(--tx2);font-size:13.5px}
+  .tg{font-size:10px;font-weight:650;padding:2px 7px;border-radius:4px;text-transform:uppercase}
+  .tg.t{background:var(--purple);color:#fff}
+  .tg.m{background:var(--acc);color:#fff}
+  .tg.b{background:var(--tx3);color:#fff}
+
+  .plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:14px}
+  .pc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .pc h4{margin:0 0 10px;font-size:16.5px;font-weight:640;display:flex;align-items:center;gap:9px}
+  .pc .big{font-size:30px;font-weight:670;letter-spacing:-.025em;line-height:1.1}
+  .pc .cap{color:var(--tx3);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+  .pc ul{margin:11px 0 0;padding-left:18px;color:var(--tx2);font-size:14px}
+  .pc li{margin-bottom:4px}
+
+  .find{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:11px;padding:19px 23px;margin-bottom:13px}
+  .find h4{margin:0 0 7px;font-size:17.5px;font-weight:640}
+  .find p{color:var(--tx2);margin:0;font-size:15px}
+  .find p b{color:var(--tx)}
+  .find.good{border-left-color:var(--green)}
+
+  .flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:19px 21px;margin-bottom:14px}
+  .fs{background:var(--card2);border-radius:9px;padding:11px 15px;font-size:14px;flex:1;min-width:130px}
+  .fs b{display:block;font-size:12.5px;color:var(--acc);margin-bottom:3px;
+    text-transform:uppercase;letter-spacing:.05em}
+  .ar{color:var(--tx3);font-size:20px}
+  footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
+    color:var(--tx3);font-size:12.8px}
+</style>
+</head>
+<body>
+<nav class="sitenav"><a href="index.html">← Все материалы</a></nav>
+<style>.sitenav{max-width:1080px;margin:0 auto;padding:14px 22px 0}
+.sitenav a{color:#4a9eff;text-decoration:none;font-size:14px;font-weight:550}
+.sitenav a:hover{text-decoration:underline}
+@media(prefers-color-scheme:light){.sitenav a{color:#1f6feb}}</style>
+<div class="wrap">
+
+<div class="kicker">Контент-завод · Good Cars</div>
+<h1>Форматы контента по воронке</h1>
+<p class="lead">Пятнадцать форматов роликов и десять типов каруселей, разложенных по этапам
+воронки. Каждый формат отобран под ресурсы Good Cars — телефон, микрофон и человек, который
+может снять сам, — и проверен на данных конкурентов.</p>
+
+<h2>Принцип: точность продукта растёт вниз по воронке</h2>
+<p class="sub">Главное правило блупринта. Наверху воронки зрителю всё равно, как именно
+выглядит машина — ему нужен крючок. Внизу он должен понимать, что именно покупает.
+Поэтому TOFU можно снимать небрежно и быстро, а BOFU требует аккуратной картинки.</p>
+
+<div class="find">
+  <h4>Почему это меняет всё для Good Cars</h4>
+  <p>Видеограф ушёл — и это бьёт только по нижней части воронки, где нужна аккуратность.
+  <b>Верх воронки, который сейчас пустой, снимается на телефон без монтажа</b>.
+  То есть начинать нужно ровно с того, что не требует ушедшего ресурса.</p>
+</div>
+
+<div class="find good">
+  <h4>Карусели не снимаются отдельно</h4>
+  <p>По блупринту карусель делается <b>на базе уже снятого ролика</b>: расшифровка разбивается
+  на тезисы, каждый тезис — слайд. Одна съёмка закрывает две единицы контента.
+  Пятнадцать роликов в месяц дают пятнадцать каруселей без единой дополнительной съёмки.</p>
+</div>
+
+<div class="stage t">
+      <div class="sh"><h2>Верх воронки — охваты</h2><span class="pill t">TOFU</span></div>
+      <p class="sg">Охваты и новые подписчики. Зритель ещё не выбирает машину — он листает ленту.</p>
+      <div class="sm"><span><b>Точность продукта:</b> Низкая. Продукт может быть фоном или отсутствовать вообще.</span><span><b>Что мерим:</b> Просмотры, доля досмотров, новые подписчики</span></div>
+      <div class="f">
+          <div class="fh"><h3>Сцена с площадки</h3>
+            <span class="fm"><span>20–45 сек</span><span>Дмитрий, телефон</span></span></div>
+          <div class="hook">«Приехал продавать машину и всю дорогу извинялся, что она грязная»</div>
+          <div class="lbl">Что в кадре</div><p>Живой момент рабочего дня: разговор с клиентом, необычная просьба, забавная ситуация. Развязка — короткая мысль или совет.</p>
+          <div class="lbl">Как снимать</div><p>Снимается на ходу, один дубль, без монтажа. Продажи в кадре нет вообще.</p>
+          <div class="why">Самый вирусный формат ниши — 15,8 млн у ИСАФТО на разговоре с мальчиком. В Одессе этого не делает никто.</div>
+          <a class="ex" href="https://www.instagram.com/p/DZxgi4fMIW2/" target="_blank" rel="noopener">Пример: ИСАФТО · 15,8 млн →</a></div><div class="f">
+          <div class="fh"><h3>Загадка детали</h3>
+            <span class="fm"><span>10–20 сек</span><span>Стас, телефон</span></span></div>
+          <div class="hook">«Кто скажет, зачем в этой машине вторая кнопка старта?»</div>
+          <div class="lbl">Что в кадре</div><p>Крупный план необычной детали салона или кузова. Вопрос на экране. Ответа в ролике нет.</p>
+          <div class="lbl">Как снимать</div><p>Обошёл площадку — снял пять деталей за раз. Контент на неделю вперёд.</p>
+          <div class="why">279 тысяч просмотров и 155 комментариев у lucky_cars. Комментарии разгоняют показы сильнее лайков.</div>
+          <a class="ex" href="https://www.instagram.com/p/DbVeQN8ACjW/" target="_blank" rel="noopener">Пример: lucky_cars_od · 279 тыс. →</a></div><div class="f">
+          <div class="fh"><h3>Молчаливый проезд</h3>
+            <span class="fm"><span>10–15 сек</span><span>Стас, телефон</span></span></div>
+          <div class="hook">Без слов — работает первый кадр и свет</div>
+          <div class="lbl">Что в кадре</div><p>Медленные проезды камерой по кузову на рассвете или закате. Только музыка, ни одного слова.</p>
+          <div class="lbl">Как снимать</div><p>Нужен хороший свет и десять минут. Материал частично уже снимается для объявлений.</p>
+          <div class="why">13 млн просмотров и 657 тысяч лайков у ИСАФТО на колонне Гелендвагенов. Обсуждать нечего — лайк ставят рефлекторно.</div>
+          <a class="ex" href="https://www.instagram.com/p/DY6-FRBiHtD/" target="_blank" rel="noopener">Пример: ИСАФТО · 13 млн →</a></div><div class="f">
+          <div class="fh"><h3>Городская реакция</h3>
+            <span class="fm"><span>5–15 сек</span><span>кто рядом</span></span></div>
+          <div class="hook">«На Аэропортовской яма, которую сегодня поймали три машины»</div>
+          <div class="lbl">Что в кадре</div><p>Реакция на событие: происшествие у салона, дорожная обстановка, что-то необычное на районе.</p>
+          <div class="lbl">Как снимать</div><p>Достать телефон и снять. Ввести правило: случилось — сняли.</p>
+          <div class="why">1,6 млн на пятисекундном ролике. Ядро ценит, когда «свой предупредил» — это работает на доверие, а не на охват ради охвата.</div>
+          <a class="ex" href="https://www.instagram.com/p/DUdF1zVDKra/" target="_blank" rel="noopener">Пример: ИСАФТО · 1,6 млн →</a></div><div class="f">
+          <div class="fh"><h3>Конфликт поколений</h3>
+            <span class="fm"><span>20–30 сек</span><span>Стас, телефон</span></span></div>
+          <div class="hook">Титр в две секунды: «Конфликт поколений»</div>
+          <div class="lbl">Что в кадре</div><p>Одна модель разных лет рядом. Или культовая машина 90-х на площадке. Титр и музыка.</p>
+          <div class="lbl">Как снимать</div><p>Снимается, когда такая машина заезжает. Требует только внимания, не времени.</p>
+          <div class="why">298 тысяч у trinity — рекорд по отношению к аудитории (x32,9). Спор в комментариях возникает сам.</div>
+          <a class="ex" href="https://www.instagram.com/p/DXRlofRCLY5/" target="_blank" rel="noopener">Пример: trinity.odesa · 298 тыс. →</a></div></div><div class="stage m">
+      <div class="sh"><h2>Середина — доверие</h2><span class="pill m">MOFU</span></div>
+      <p class="sg">Доверие и экспертность. Зритель уже думает о покупке или продаже, выбирает, кому верить.</p>
+      <div class="sm"><span><b>Точность продукта:</b> Средняя. Продукт в кадре обязателен, но идеальная картинка не нужна.</span><span><b>Что мерим:</b> Досмотры, сохранения, комментарии с вопросами, переходы в профиль</span></div>
+      <div class="f">
+          <div class="fh"><h3>Разоблачение мифа</h3>
+            <span class="fm"><span>60–90 сек</span><span>Дмитрий, телефон + микрофон</span></span></div>
+          <div class="hook">«Толщиномер не показывает битую машину. Показываю, что он показывает на самом деле»</div>
+          <div class="lbl">Что в кадре</div><p>Народное заблуждение опровергается наглядным экспериментом прямо в кадре.</p>
+          <div class="lbl">Как снимать</div><p>Нужен реквизит: прибор, вторая машина, купюра. Один дубль, объяснение голосом.</p>
+          <div class="why">🔴 Главный формат. 230 тысяч у trinity. Бьёт в центральную боль ядра — «я доверился не тем». За 22 года у Дмитрия таких мифов на год вперёд.</div>
+          <a class="ex" href="https://www.instagram.com/p/DG3UykdiCVh/" target="_blank" rel="noopener">Пример: trinity.odesa · 230 тыс. →</a></div><div class="f">
+          <div class="fh"><h3>Стоимость владения на бумаге</h3>
+            <span class="fm"><span>60–90 сек</span><span>Дмитрий</span></span></div>
+          <div class="hook">«Год езды на этой стоит восемь тысяч. На той, что вдвое дешевле — двенадцать»</div>
+          <div class="lbl">Что в кадре</div><p>Расчёт на листе: сколько машина потеряет за год, за два, сколько заберут при обратном выкупе.</p>
+          <div class="lbl">Как снимать</div><p>Лист бумаги, маркер, машина на фоне. Или таблица на экране.</p>
+          <div class="why">🔴 Уникальный актив: 22 года данных по остаточной стоимости. Ядро мыслит именно так — «захожу в 70, выхожу в 60». Ни один конкурент на этом языке не говорит.</div>
+          <span class="exn">аналога у конкурентов нет</span></div><div class="f">
+          <div class="fh"><h3>Осмотр за 60 секунд</h3>
+            <span class="fm"><span>40–70 сек</span><span>Дмитрий</span></span></div>
+          <div class="hook">«Три вещи, которые проверит человек без опыта. Пальцем, без приборов»</div>
+          <div class="lbl">Что в кадре</div><p>Пошаговый приём: куда смотреть, что трогать, что должно насторожить.</p>
+          <div class="lbl">Как снимать</div><p>Съёмка от первого лица у машины, комментарий по ходу действия.</p>
+          <div class="why">1,8 млн у ИСАФТО на обучении приёму. Такое сохраняют в закладки, а сохранения алгоритм ценит выше лайков. Отдельно попадает в женский сегмент, который рынок не обслуживает.</div>
+          <a class="ex" href="https://www.instagram.com/p/DXWSkVXgv7L/" target="_blank" rel="noopener">Пример: ИСАФТО · 1,8 млн →</a></div><div class="f">
+          <div class="fh"><h3>Ответ на стыдный вопрос</h3>
+            <span class="fm"><span>50–90 сек</span><span>Дмитрий</span></span></div>
+          <div class="hook">«Хто питав, чому так? Відповідаємо»</div>
+          <div class="lbl">Что в кадре</div><p>Разбор того, что человек стесняется спросить вслух: почему запотевают фары, что значит «не бита, не крашена», зачем нужен перекуп.</p>
+          <div class="lbl">Как снимать</div><p>Обход машин, объяснение голосом за кадром.</p>
+          <div class="why">Уже доказано на самом Good Cars: лучший ролик за год, 48 тысяч. Не хватало только текстового хука в первом кадре.</div>
+          <a class="ex" href="https://www.instagram.com/p/DT5YiyQiGv8/" target="_blank" rel="noopener">Пример: Good Cars · 48 тыс. →</a></div><div class="f">
+          <div class="fh"><h3>Два варианта — что выгоднее</h3>
+            <span class="fm"><span>60–95 сек</span><span>Дмитрий + Стас</span></span></div>
+          <div class="hook">«Обе в бюджете. Одна теряет 15% в год, вторая 30%. Какую берёте?»</div>
+          <div class="lbl">Что в кадре</div><p>Две машины рядом, живой диалог, вопрос о выборе — в подписи с ценами.</p>
+          <div class="lbl">Как снимать</div><p>Нужны две машины и второй человек для диалога. Разговор, а не монолог.</p>
+          <div class="why">2,4 млн у ИСАФТО. Формат «выбери одну» заставляет комментировать, а диалог держит зрителя все полторы минуты.</div>
+          <a class="ex" href="https://www.instagram.com/p/DYNJ3fHMEdG/" target="_blank" rel="noopener">Пример: ИСАФТО · 2,4 млн →</a></div></div><div class="stage b">
+      <div class="sh"><h2>Низ — продажа</h2><span class="pill b">BOFU</span></div>
+      <p class="sg">Продажа. Зритель сравнивает поставщиков и готов действовать.</p>
+      <div class="sm"><span><b>Точность продукта:</b> Максимальная. Машина показана точно: состояние, комплектация, детали.</span><span><b>Что мерим:</b> Сообщения в директ, звонки, кодовое слово в комментариях</span></div>
+      <div class="f">
+          <div class="fh"><h3>Анонс без цены</h3>
+            <span class="fm"><span>10–30 сек</span><span>Стас</span></span></div>
+          <div class="hook">«Завтра выставляем. Одна из тех, что уходят до объявления»</div>
+          <div class="lbl">Что в кадре</div><p>Красивое видео машины. В кадре ни цены, ни характеристик — всё уходит в подпись.</p>
+          <div class="lbl">Как снимать</div><p>Та же съёмка, что и для молчаливого проезда. Меняется только подпись.</p>
+          <div class="why">6,5% лайков против 0,2% у прямой рекламы. Интрига продаёт лучше предложения и не выглядит навязчиво — важно для ядра.</div>
+          <a class="ex" href="https://www.instagram.com/p/Dbp7yJiCJwC/" target="_blank" rel="noopener">Пример: ИСАФТО · 2,8 млн →</a></div><div class="f">
+          <div class="fh"><h3>Закулисье сделки</h3>
+            <span class="fm"><span>30–90 сек</span><span>Стас</span></span></div>
+          <div class="hook">«Вот что происходит между „я продаю“ и „деньги на счету“»</div>
+          <div class="lbl">Что в кадре</div><p>Процесс работы: приехали, осмотрели, оформили, отдали ключи.</p>
+          <div class="lbl">Как снимать</div><p>Съёмка по ходу обычной сделки, дополнительного времени не требует.</p>
+          <div class="why">329 тысяч у lucky_cars. Показывает работу вместо рассказа о ней — снимает страх «доверился не тем».</div>
+          <a class="ex" href="https://www.instagram.com/p/C-7-7CMNmTj/" target="_blank" rel="noopener">Пример: lucky_cars_od · 329 тыс. →</a></div><div class="f">
+          <div class="fh"><h3>История клиента</h3>
+            <span class="fm"><span>60–120 сек</span><span>Дмитрий</span></span></div>
+          <div class="hook">«Мужчина час выбирал между двумя. Позвонил жене — и купил третью»</div>
+          <div class="lbl">Что в кадре</div><p>Реальный случай сделки: с чем пришёл, что оказалось, чем закончилось. Без имён.</p>
+          <div class="lbl">Как снимать</div><p>Рассказ на камеру или голосом поверх съёмки машины.</p>
+          <div class="why">Работает право вето жены, семейный фильтр, страх ошибки — то, что в ДНК описано как недоиспользованная жила.</div>
+          <span class="exn">формат из ДНК клиента</span></div><div class="f">
+          <div class="fh"><h3>Почему эта дешевле</h3>
+            <span class="fm"><span>40–70 сек</span><span>Дмитрий</span></span></div>
+          <div class="hook">«Эта машина дешевле рынка на четыре тысячи. Объясняю, где подвох — он есть»</div>
+          <div class="lbl">Что в кадре</div><p>Честный разбор: почему цена ниже, что с машиной, кому подойдёт, кому нет.</p>
+          <div class="lbl">Как снимать</div><p>Обход машины с объяснением. Обязательно называть и минусы.</p>
+          <div class="why">136 тысяч у Keep Car на вопросе о цене. Честность про минусы — самый сильный сигнал доверия для того, кто боится, что его разведут.</div>
+          <a class="ex" href="https://www.instagram.com/p/DYEca2CNHtc/" target="_blank" rel="noopener">Пример: Keep Car · 136 тыс. →</a></div><div class="f">
+          <div class="fh"><h3>Ушла за два дня</h3>
+            <span class="fm"><span>10–20 сек</span><span>Стас</span></span></div>
+          <div class="hook">«Ушла за два дня. Такие обычно и уходят за два дня»</div>
+          <div class="lbl">Что в кадре</div><p>Короткий ролик о проданной машине: что было, как быстро ушло, почему.</p>
+          <div class="lbl">Как снимать</div><p>Архивные кадры машины плюс подпись. Монтаж не нужен.</p>
+          <div class="why">Соцдоказательство без хвастовства. У ИСАФТО подпись «Продана» на ролике с 218 тысячами просмотров и 5,8% лайков.</div>
+          <a class="ex" href="https://www.instagram.com/p/DbsO6jwsK8t/" target="_blank" rel="noopener">Пример: Magnat · 218 тыс. →</a></div></div>
+
+<h2>Карусели: из чего делаем</h2>
+<p class="sub">Пять источников материала. Ни один не требует отдельной съёмочной сессии.</p>
+<div class="tbl">
+<table>
+  <thead><tr><th>Источник</th><th>Что берём</th><th>Почему это работает</th></tr></thead>
+  <tbody><tr><td><b>Расшифровка своего же ролика</b></td><td class="n">Снятый ролик разбирается на тезисы, каждый тезис — слайд. Одна съёмка даёт и Reels, и карусель.</td><td class="n">Основной путь. По блупринту карусели делаются на базе роликов, а не отдельно.</td></tr><tr><td><b>Фото машин с площадки</b></td><td class="n">Уже снимаются для объявлений. Подборка, сравнение, рейтинг — новый смысл из готового материала.</td><td class="n">110 машин в наличии — материал бесконечный, доснимать не нужно.</td></tr><tr><td><b>Данные по остаточной стоимости</b></td><td class="n">22 года наблюдений превращаются в таблицы: что теряет в цене, что держит, во что заходить.</td><td class="n">🔴 Актив, которого нет ни у кого в городе. Самый сильный источник для MOFU.</td></tr><tr><td><b>Вопросы клиентов</b></td><td class="n">То, что спрашивают в директе и на площадке каждый день. Один вопрос — одна карусель.</td><td class="n">Бесплатный поток тем. Заодно показывает, что вопросы слышат.</td></tr><tr><td><b>Расшифровки конкурентов</b></td><td class="n">База из 119 роликов: видно, какие темы заходят рынку. Берём тему, даём свой ответ.</td><td class="n">Не копирование, а проверенная тема с другой подачей и своей фактурой.</td></tr></tbody>
+</table>
+</div>
+
+<h2>Десять типов каруселей</h2>
+<p class="sub">Каждый тип привязан к этапу воронки и к источнику материала.</p>
+<div class="tbl">
+<table>
+  <thead><tr><th>Этап</th><th>Тип</th><th>Слайдов</th><th>Что внутри</th><th>Из чего</th></tr></thead>
+  <tbody><tr><td><span class="tg t">TOFU</span></td><td><b>Подборка или рейтинг</b></td><td class="n">7–10</td><td class="n">«Пять машин до 15 тысяч, которые не развалятся» — по слайду на машину, фото и одна причина.</td><td class="n">Фото машин с площадки</td></tr><tr><td><span class="tg t">TOFU</span></td><td><b>Факты о модели</b></td><td class="n">6–8</td><td class="n">История модели, чем известна, почему её любят. Ностальгия и узнавание.</td><td class="n">Фото + открытые данные</td></tr><tr><td><span class="tg t">TOFU</span></td><td><b>Что скрывают цифры</b></td><td class="n">6–8</td><td class="n">Разбор объявления с AutoRia: что написано и что это значит на самом деле.</td><td class="n">Скриншоты объявлений</td></tr><tr><td><span class="tg m">MOFU</span></td><td><b>Чек-лист осмотра</b></td><td class="n">8–10</td><td class="n">Пошагово: что проверить перед покупкой. Слайд = пункт с фото детали.</td><td class="n">Расшифровка ролика «Осмотр за 60 секунд»</td></tr><tr><td><span class="tg m">MOFU</span></td><td><b>Миф и правда</b></td><td class="n">6–8</td><td class="n">Слева заблуждение, справа как на самом деле. Тот же материал, что в ролике-разоблачении.</td><td class="n">Расшифровка ролика-разоблачения</td></tr><tr><td><span class="tg m">MOFU</span></td><td><b>Таблица потерь</b></td><td class="n">5–7</td><td class="n">Сколько теряют разные модели за год владения. Цифры из своей практики.</td><td class="n">🔴 Данные по остаточной стоимости</td></tr><tr><td><span class="tg m">MOFU</span></td><td><b>Ответ на вопрос</b></td><td class="n">5–8</td><td class="n">Один частый вопрос, развёрнутый ответ по слайдам. Заканчивается приглашением спросить.</td><td class="n">Вопросы клиентов</td></tr><tr><td><span class="tg b">BOFU</span></td><td><b>Карточка машины</b></td><td class="n">8–10</td><td class="n">Одна машина подробно: состояние, комплектация, история, цена на последнем слайде.</td><td class="n">Фото машин</td></tr><tr><td><span class="tg b">BOFU</span></td><td><b>История сделки</b></td><td class="n">6–8</td><td class="n">Кейс: с чем пришёл клиент, что сделали, чем закончилось. Без имён.</td><td class="n">Расшифровка ролика «История клиента»</td></tr><tr><td><span class="tg b">BOFU</span></td><td><b>Ответы на возражения</b></td><td class="n">7–9</td><td class="n">«Дорого», «сам продам», «а вдруг битая» — по слайду на возражение со спокойным ответом.</td><td class="n">Вопросы клиентов + ДНК</td></tr></tbody>
+</table>
+</div>
+
+<h2>Месячный набор</h2>
+<p class="sub">Норматив блупринта: пятнадцать роликов и пятнадцать каруселей.
+Распределение смещено в сторону верха и середины — там сейчас пусто.</p>
+<div class="plan">
+  <div class="pc"><h4><span class="tg t">TOFU</span> Охваты</h4>
+    <div class="big">5 + 5</div><div class="cap">роликов и каруселей</div>
+    <ul><li>Сцена с площадки — 2</li><li>Загадка детали — 2</li><li>Молчаливый проезд — 1</li>
+    <li>Реакция и классика — по ситуации</li></ul></div>
+  <div class="pc"><h4><span class="tg m">MOFU</span> Доверие</h4>
+    <div class="big">5 + 6</div><div class="cap">роликов и каруселей</div>
+    <ul><li>Разоблачение мифа — 2</li><li>Стоимость владения — 1</li><li>Осмотр за 60 секунд — 1</li>
+    <li>Ответ на стыдный вопрос — 1</li></ul></div>
+  <div class="pc"><h4><span class="tg b">BOFU</span> Продажа</h4>
+    <div class="big">5 + 4</div><div class="cap">роликов и каруселей</div>
+    <ul><li>Анонс без цены — 2</li><li>Закулисье сделки — 1</li><li>История клиента — 1</li>
+    <li>Почему эта дешевле — 1</li></ul></div>
+</div>
+
+<h2>Куда ведёт контент</h2>
+<p class="sub">Цепочка прогрева из блупринта, адаптированная под автобизнес.</p>
+<div class="flow">
+  <div class="fs"><b>Контент</b>Ролик или карусель</div><span class="ar">→</span>
+  <div class="fs"><b>Кодовое слово</b>В комментариях или директе</div><span class="ar">→</span>
+  <div class="fs"><b>Бот</b>Выдаёт материал автоматически</div><span class="ar">→</span>
+  <div class="fs"><b>Лид-магнит</b>Чек-лист осмотра или расчёт потерь</div><span class="ar">→</span>
+  <div class="fs"><b>Разговор</b>Живой контакт с Дмитрием</div>
+</div>
+<p class="sub">Лид-магнит логично собрать из того же материала: чек-лист проверки перед покупкой
+или таблица, сколько теряет в цене конкретная модель за год. Оба документа делаются из
+контента, который и так производится.</p>
+
+<footer>
+  Форматы отобраны на основе разбора 119 роликов тринадцати аккаунтов конкурентов
+  и методологии контент-завода. Цифры в блоках «почему сработает» — реальные показатели
+  роликов конкурентов, собранные 7 августа 2026.
+</footer>
+</div>
+</body>
+</html>
