@@ -33,8 +33,20 @@
     color:var(--tx3);margin:0 0 16px}
   .cards{display:grid;gap:13px;margin-bottom:44px}
   a.c{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
-    padding:22px 25px;text-decoration:none;color:inherit;transition:.14s;position:relative}
-  a.c:hover{border-color:var(--acc);transform:translateY(-2px)}
+    padding:22px 25px 20px;text-decoration:none;color:inherit;transition:.14s;position:relative;
+    cursor:pointer}
+  a.c:hover{border-color:var(--acc);transform:translateY(-2px);
+    box-shadow:0 6px 22px -12px rgba(74,158,255,.55)}
+  .arr{position:absolute;top:22px;right:24px;color:var(--tx3);font-size:19px;transition:.14s}
+  a.c:hover .arr{color:var(--acc);transform:translateX(3px)}
+  .cbot{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:15px;
+    padding-top:15px;border-top:1px solid var(--line)}
+  .btn{display:inline-flex;align-items:center;gap:7px;background:var(--acc);color:#fff;
+    font-size:14px;font-weight:600;padding:9px 17px;border-radius:9px;transition:.14s;
+    white-space:nowrap}
+  a.c:hover .btn{filter:brightness(1.12)}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--tx2)}
+  a.c:hover .btn.ghost{border-color:var(--acc);color:var(--acc)}
   .ct{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:7px}
   .ct h3{margin:0;font-size:21px;font-weight:645;letter-spacing:-.018em}
   .step{width:26px;height:26px;border-radius:7px;background:var(--card2);color:var(--tx3);
@@ -42,6 +54,7 @@
   a.c:hover .step{background:var(--acc);color:#fff}
   .c p{color:var(--tx2);font-size:15px;margin:0}
   .cm{color:var(--tx3);font-size:12.5px;margin-top:11px;display:flex;gap:8px;flex-wrap:wrap}
+  .cbot .cm{margin-top:0;margin-left:auto}
   .cm span{background:var(--card2);border-radius:5px;padding:3px 9px}
   .cm .hl{color:var(--acc)}
 
@@ -69,42 +82,47 @@
   <div class="num"><b>27</b><span>форматов</span></div>
 </div>
 
-<h2>Материалы</h2>
+<h2>Материалы — нажмите на любой, чтобы открыть</h2>
 <div class="cards">
 
   <a class="c" href="formats.html">
+    <span class="arr">→</span>
     <div class="ct"><span class="step">1</span><h3>Библиотека форматов</h3></div>
     <p>Двадцать два формата коротких видео и пять типов каруселей: как снято и как подано.
     Каждый оценён под ресурсы Good Cars — кто снимает, сложность, подходит ли тону.</p>
-    <div class="cm"><span class="hl">с этого начинать</span><span>22 формата видео</span><span>5 типов каруселей</span><span>15 берём в работу</span></div>
+    <div class="cbot"><span class="btn">Открыть<span>→</span></span><span class="cm"><span class="hl">с этого начинать</span><span>22 формата видео</span><span>5 типов каруселей</span><span>15 берём в работу</span></span></div>
   </a>
 
   <a class="c" href="hooks.html">
+    <span class="arr">→</span>
     <div class="ct"><span class="step">2</span><h3>Банк хуков и форматов</h3></div>
     <p>Библиотека приёмов: как конкуренты начинают ролики. Каждый приём привязан к формуле,
     пропущен через портрет аудитории и снабжён готовыми формулировками под Good Cars.</p>
-    <div class="cm"><span>38 хуков конкурентов</span><span class="hl">33 готовых под Good Cars</span><span>14 приёмов</span></div>
+    <div class="cbot"><span class="btn">Открыть<span>→</span></span><span class="cm"><span>38 хуков конкурентов</span><span class="hl">33 готовых под Good Cars</span><span>14 приёмов</span></span></div>
   </a>
 
   <a class="c" href="analysis.html">
+    <span class="arr">→</span>
     <div class="ct"><span class="step">3</span><h3>Что реально залетает в Reels</h3></div>
     <p>Разбор двадцати лучших роликов по кадрам: хук, что происходит в кадре, почему сработало.
     Кто на рынке лидер, за счёт чего и где проходит граница между органикой и рекламой.</p>
-    <div class="cm"><span>20 роликов по кадрам</span><span>здоровье аккаунтов</span><span>влияние длины</span></div>
+    <div class="cbot"><span class="btn">Открыть<span>→</span></span><span class="cm"><span>20 роликов по кадрам</span><span>здоровье аккаунтов</span><span>влияние длины</span></span></div>
   </a>
 
   <a class="c" href="transcripts.html">
+    <span class="arr">→</span>
     <div class="ct"><span class="step">4</span><h3>Расшифровки роликов</h3></div>
     <p>Полные тексты речи из 119 лучших роликов с поиском. Можно найти, как конкуренты
     формулируют мысль про пробег, торг, состояние кузова или цену — и взять оборот в сценарий.</p>
-    <div class="cm"><span>84 ролика с речью</span><span>поиск по тексту</span><span>ссылки на оригиналы</span></div>
+    <div class="cbot"><span class="btn">Открыть<span>→</span></span><span class="cm"><span>84 ролика с речью</span><span>поиск по тексту</span><span>ссылки на оригиналы</span></span></div>
   </a>
 
   <a class="c" href="reels-database.html">
+    <span class="arr">→</span>
     <div class="ct"><span class="step">5</span><h3>База роликов</h3></div>
     <p>Все 655 собранных роликов со статистикой: просмотры, лайки, отклик, длина, дата.
     Фильтры по группам конкурентов, качеству отклика и длительности.</p>
-    <div class="cm"><span>655 роликов</span><span>фильтры</span><span>сортировка</span></div>
+    <div class="cbot"><span class="btn">Открыть<span>→</span></span><span class="cm"><span>655 роликов</span><span>фильтры</span><span>сортировка</span></span></div>
   </a>
 
 </div>
